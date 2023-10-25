@@ -15,7 +15,7 @@ from typing import Union
 @dataclass
 class ModelArguments:
     pretrained_model_name_or_path: str=field(
-        default=""
+        default="kykim/bert-kor-base"
     )
     use_auth_token: str=field(
         default="", metadata={"help": "비공개 모델 사용에 필요한 인증 토큰"}

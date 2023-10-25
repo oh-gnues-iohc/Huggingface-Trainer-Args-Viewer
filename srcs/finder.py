@@ -1,19 +1,17 @@
 import ast
-
 class DataclassFinder(list):
-    def __init__(self, file_path):
+    def __init__(self, file):
         super().__init__()
-        self.file_path = file_path
         
-        tree = self._parse_file()
+        tree = self._parse_file(file)
+        
         for node in ast.walk(tree):
             if isinstance(node, ast.ClassDef) and self._has_dataclass_decorator(node):
                 dataclass = self._parse_dataclass(node)
                 self.append(dataclass)
 
-    def _parse_file(self):
-        with open(self.file_path, 'r', encoding='utf-8') as file:
-            return ast.parse(file.read())
+    def _parse_file(self, file):
+            return ast.parse(file)
 
     def _has_dataclass_decorator(self, class_node):
         decorators = {d.id for d in class_node.decorator_list}
