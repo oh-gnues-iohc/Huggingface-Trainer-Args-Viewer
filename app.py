@@ -15,7 +15,11 @@ def main():
                 command[element['name']] = st.text_input(f"{element['name']}: ", f"{element['default'] if element['default'] else ''}", help=f"type: {element['type']}\n\n{element['help'] if element['help'] else ''}")
             st.markdown("---")
 
-        st.write(command)
+        run = f"python {uploaded_file.name}"
+        for key, value in command.items():
+            if value:
+                run += f" --{key}={value}"
+        st.success(run)
 
 if __name__ == "__main__":
     main()
